@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DREESHFILMEDIT | Cinematic Videography & Nature Photography in Shelby, NC</title>
+<meta name="description" content="Cinematic music video & iPhone videography shot on Blackmagic Camera. Nature photography. Based in Shelby, NC. Open for bookings.">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:title" content="DREESHFILMEDIT">
+<meta property="og:description" content="Cinematic videography & nature photography in Shelby, NC. Open for sessions now.">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            red: '#e53935',
+            dark: '#0a0a0a',
+            surface: '#121212',
+            card: '#1a1a1a',
+            border: '#2a2a2a',
+            accent: '#ff4d4d'
+          }
+        },
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+          display: ['Anton', 'Impact', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- FontAwesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+  body {
+    background-color: #0a0a0a;
+    color: #f3f4f6;
+    font-family: 'Inter', sans-serif;
+  }
+  .display-font {
+    font-family: 'Anton', Impact, sans-serif;
+    letter-spacing: 0.03em;
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0a0a0a;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #e53935;
+  }
+  .glow-red {
+    box-shadow: 0 0 50px -10px rgba(229, 57, 53, 0.3);
+  }
+  .text-stroke {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  }
+</style>
+</head>
+<body class="bg-brand-dark text-gray-100 antialiased selection:bg-brand-red selection:text-white">
+
+  <!-- Notification Banner / Modal (Custom alert alternative) -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-brand-surface border border-brand-border px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
+    <div class="w-3 h-3 rounded-full bg-brand-red animate-ping"></div>
+    <span id="toast-msg" class="font-medium text-sm text-white">Message sent successfully!</span>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-40 bg-brand-dark/90 backdrop-blur-md border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#top" class="flex items-center gap-3 group">
+        <div class="w-3.5 h-3.5 rounded-full bg-brand-red animate-pulse"></div>
+        <span class="display-font text-2xl sm:text-3xl tracking-wider text-white group-hover:text-brand-red transition-colors">DREESHFILMEDIT</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm uppercase tracking-wider">
+        <a href="#work" class="text-gray-300 hover:text-brand-red transition-colors">Portfolio</a>
+        <a href="#services" class="text-gray-300 hover:text-brand-red transition-colors">Services</a>
+        <a href="#about" class="text-gray-300 hover:text-brand-red transition-colors">About</a>
+        <a href="#process" class="text-gray-300 hover:text-brand-red transition-colors">Process</a>
+      </nav>
+
+      <!-- Right Action -->
+      <div class="flex items-center gap-4">
+        <div class="hidden lg:flex flex-col items-end text-xs font-mono text-gray-400">
+          <span class="text-brand-red font-bold flex items-center gap-1.5"><i class="fa-solid fa-circle text-[8px] animate-pulse"></i> LIVE REC</span>
+          <span id="live-time">00:00:00:00</span>
+        </div>
+        <a href="#book" class="bg-brand-red hover:bg-red-600 text-white font-semibold px-5 py-2.5 rounded-full text-sm uppercase tracking-wider transition-all shadow-lg hover:shadow-brand-red/40 hover:scale-105 active:scale-95">
+          Book Session
+        </a>
+        <!-- Mobile Menu Toggle -->
+        <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white p-2" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-surface border-b border-brand-border px-6 py-6 space-y-4">
+      <a href="#work" class="block text-lg font-semibold hover:text-brand-red transition-colors mobile-link">Portfolio</a>
+      <a href="#services" class="block text-lg font-semibold hover:text-brand-red transition-colors mobile-link">Services</a>
+      <a href="#about" class="block text-lg font-semibold hover:text-brand-red transition-colors mobile-link">About</a>
+      <a href="#process" class="block text-lg font-semibold hover:text-brand-red transition-colors mobile-link">Process</a>
+      <a href="#book" class="block text-lg font-semibold text-brand-red mobile-link">Book a Session</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero Section -->
+    <section class="relative min-h-[90vh] flex items-center pt-24 pb-16 overflow-hidden border-b border-brand-border">
+      <!-- Background glowing ambient shapes -->
+      <div class="absolute -top-40 -left-40 w-96 h-96 bg-brand-red/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 right-0 w-80 h-80 bg-red-900/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-surface border border-brand-border text-xs font-mono uppercase tracking-widest text-brand-red">
+              <i class="fa-solid fa-video text-[10px]"></i> Shelby, NC • iPhone + Blackmagic Camera
+            </div>
+            
+            <h1 class="display-font text-6xl sm:text-7xl lg:text-8xl xl:text-9xl uppercase tracking-tight leading-[0.9]">
+              Cinematic <br>
+              <span class="text-transparent text-stroke">Vision &amp;</span> <br>
+              <span class="text-brand-red">Nature Art</span>
+            </h1>
+
+            <p class="text-gray-400 text-lg sm:text-xl max-w-xl font-light leading-relaxed">
+              High-impact cinematic videography and evocative nature photography. Shot on iPhone with Blackmagic Camera, crafted with professional color grading and raw aesthetic precision.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a href="#book" class="bg-brand-red hover:bg-red-600 text-white font-medium px-8 py-4 rounded-full uppercase tracking-wider text-sm transition-all shadow-xl hover:shadow-brand-red/30 flex items-center gap-3 group">
+                <span>Book Your Session</span>
+                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+              </a>
+              <a href="#work" class="bg-brand-surface hover:bg-brand-card border border-brand-border text-white font-medium px-8 py-4 rounded-full uppercase tracking-wider text-sm transition-all flex items-center gap-2">
+                <i class="fa-solid fa-play text-xs text-brand-red"></i> Watch Reel
+              </a>
+            </div>
+
+            <div class="pt-6 grid grid-cols-3 gap-6 border-t border-brand-border/60 max-w-lg font-mono text-xs text-gray-400">
+              <div>
+                <span class="block text-white text-lg font-bold">4K 24FPS</span>
+                Pro Res Graded
+              </div>
+              <div>
+                <span class="block text-white text-lg font-bold">Shelby, NC</span>
+                Local &amp; Travel
+              </div>
+              <div>
+                <span class="block text-white text-lg font-bold">100%</span>
+                Cinematic Focus
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual / Cinematic Preview Frame -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border-2 border-brand-border bg-brand-surface group glow-red">
+              <img src="https://images.unsplash.com/photo-1542224566-6e85f2e6772f?q=80&w=1200&auto=format&fit=crop" 
+                   alt="Cinematic nature photography portrait preview" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                   onerror="this.src='https://placehold.co/800x1000/121212/ff4d4d?text=DREESHFILMEDIT'">
+              
+              <!-- Camera HUD Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/60 pointer-events-none p-6 flex flex-col justify-between">
+                <div class="flex justify-between items-center text-xs font-mono text-white/90">
+                  <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> REC [•]</span>
+                  <span class="bg-black/40 backdrop-blur-md px-2.5 py-1 rounded border border-white/10">BMC APP • 24.00 FPS</span>
+                </div>
+                <div class="space-y-1">
+                  <div class="flex items-center justify-between text-xs font-mono text-gray-300">
+                    <span>ISO 400</span>
+                    <span>1/48s</span>
+                    <span>f/1.78</span>
+                    <span>5600K</span>
+                  </div>
+                  <div class="w-full bg-white/20 h-1 rounded-full overflow-hidden">
+                    <div class="bg-brand-red w-3/4 h-full"></div>
+                  </div>
+                  <div class="flex justify-between text-[11px] font-mono text-brand-red pt-1 font-bold tracking-widest uppercase">
+                    <span>DREESHFILMEDIT STUDIOS</span>
+                    <span>SHELBY NC</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Decorative Corner Accents -->
+              <div class="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-white/60 pointer-events-none"></div>
+              <div class="absolute top-4 right-4 w-4 h-4 border-t-2 border-r-2 border-white/60 pointer-events-none"></div>
+              <div class="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-white/60 pointer-events-none"></div>
+              <div class="absolute bottom-4 right-4 w-4 h-4 border-b-2 border-r-2 border-white/60 pointer-events-none"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee Ticker -->
+    <div class="bg-brand-red text-white py-3 overflow-hidden whitespace-nowrap border-b border-brand-border font-mono text-sm tracking-widest uppercase font-bold">
+      <div class="inline-block animate-[slide_30s_linear_infinite]">
+        <span>OPEN FOR SESSIONS NOW &nbsp;•&nbsp; NATURE PHOTOGRAPHY &nbsp;•&nbsp; CINEMATIC VIDEO &nbsp;•&nbsp; BLACKMAGIC CAMERA &nbsp;•&nbsp; SHELBY, NC &nbsp;•&nbsp;</span>
+        <span>OPEN FOR SESSIONS NOW &nbsp;•&nbsp; NATURE PHOTOGRAPHY &nbsp;•&nbsp; CINEMATIC VIDEO &nbsp;•&nbsp; BLACKMAGIC CAMERA &nbsp;•&nbsp; SHELBY, NC &nbsp;•&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- Portfolio Section -->
+    <section id="work" class="py-24 bg-brand-dark">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <span class="text-brand-red font-mono text-xs uppercase tracking-widest block mb-2">// SELECTED WORKS</span>
+            <h2 class="display-font text-4xl sm:text-6xl uppercase tracking-wide">The Portfolio</h2>
+          </div>
+          <p class="text-gray-400 max-w-md text-base">
+            Light, raw elements, and slow cinematic movement. Frames captured on location in Shelby, NC and surrounding nature reserves.
+          </p>
+        </div>
+
+        <!-- Filter / Tabs -->
+        <div class="flex flex-wrap gap-3 mb-10" id="filter-btns">
+          <button data-filter="all" class="px-5 py-2 rounded-full text-xs font-mono uppercase tracking-wider bg-brand-red text-white transition-all filter-btn active">All Work</button>
+          <button data-filter="nature" class="px-5 py-2 rounded-full text-xs font-mono uppercase tracking-wider bg-brand-surface hover:bg-brand-card text-gray-300 border border-brand-border transition-all filter-btn">Nature Photography</button>
+          <button data-filter="video" class="px-5 py-2 rounded-full text-xs font-mono uppercase tracking-wider bg-brand-surface hover:bg-brand-card text-gray-300 border border-brand-border transition-all filter-btn">Cinematic Video</button>
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+          
+          <!-- Item 1 -->
+          <div class="portfolio-item group relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-surface border border-brand-border" data-category="nature">
+            <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Golden hour misty forest trail" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                 onerror="this.src='https://placehold.co/600x750/1a1a1a/ff4d4d?text=Golden+Hour'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+              <span class="text-xs font-mono text-brand-red uppercase tracking-wider mb-1">Nature Photography</span>
+              <h3 class="display-font text-2xl text-white">Golden Hour Trail</h3>
+              <p class="text-xs text-gray-300 mt-1 line-clamp-1">Natural light captured in Shelby woods.</p>
+            </div>
+            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white border border-white/10">PHOTO</div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="portfolio-item group relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-surface border border-brand-border" data-category="video">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Cinematic mood green lighting" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                 onerror="this.src='https://placehold.co/600x750/1a1a1a/ff4d4d?text=Green+Light'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+              <span class="text-xs font-mono text-brand-red uppercase tracking-wider mb-1">Cinematic Video</span>
+              <h3 class="display-font text-2xl text-white">Nocturnal Canopy</h3>
+              <p class="text-xs text-gray-300 mt-1 line-clamp-1">Shot on iPhone in Blackmagic Camera.</p>
+            </div>
+            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white border border-white/10">VIDEO</div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="portfolio-item group relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-surface border border-brand-border" data-category="nature">
+            <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Soft focus pine trees" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                 onerror="this.src='https://placehold.co/600x750/1a1a1a/ff4d4d?text=Soft+Focus'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+              <span class="text-xs font-mono text-brand-red uppercase tracking-wider mb-1">Nature Photography</span>
+              <h3 class="display-font text-2xl text-white">Soft Pine Depths</h3>
+              <p class="text-xs text-gray-300 mt-1 line-clamp-1">Shallow depth of field focus study.</p>
+            </div>
+            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white border border-white/10">PHOTO</div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="portfolio-item group relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-surface border border-brand-border" data-category="nature">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Open field horizon notes" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                 onerror="this.src='https://placehold.co/600x750/1a1a1a/ff4d4d?text=Field+Notes'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+              <span class="text-xs font-mono text-brand-red uppercase tracking-wider mb-1">Nature Photography</span>
+              <h3 class="display-font text-2xl text-white">Open Meadow Notes</h3>
+              <p class="text-xs text-gray-300 mt-1 line-clamp-1">Expansive skies over NC hills.</p>
+            </div>
+            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white border border-white/10">PHOTO</div>
+          </div>
+
+          <!-- Item 5 -->
+          <div class="portfolio-item group relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-surface border border-brand-border" data-category="video">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Cinematic motion waterfall" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                 onerror="this.src='https://placehold.co/600x750/1a1a1a/ff4d4d?text=In+Motion'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+              <span class="text-xs font-mono text-brand-red uppercase tracking-wider mb-1">Cinematic Video</span>
+              <h3 class="display-font text-2xl text-white">Flow State Motion</h3>
+              <p class="text-xs text-gray-300 mt-1 line-clamp-1">Graded ProRes log footage in motion.</p>
+            </div>
+            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white border border-white/10">VIDEO</div>
+          </div>
+
+          <!-- Item 6 -->
+          <div class="portfolio-item group relative aspect-[4/5] rounded-2xl overflow-hidden bg-brand-surface border border-brand-border" data-category="nature">
+            <img src="https://images.unsplash.com/photo-1511497584788-876761197069?q=80&w=1000&auto=format&fit=crop" 
+                 alt="Quiet trail moss" 
+                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                 onerror="this.src='https://placehold.co/600x750/1a1a1a/ff4d4d?text=Quiet+Trail'">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-6">
+              <span class="text-xs font-mono text-brand-red uppercase tracking-wider mb-1">Nature Photography</span>
+              <h3 class="display-font text-2xl text-white">Quiet Trail Moss</h3>
+              <p class="text-xs text-gray-300 mt-1 line-clamp-1">Macro perspective on forest floor.</p>
+            </div>
+            <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-mono text-white border border-white/10">PHOTO</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-surface border-y border-brand-border relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-brand-red font-mono text-xs uppercase tracking-widest block mb-2">// OFFERINGS</span>
+          <h2 class="display-font text-4xl sm:text-6xl uppercase tracking-wide">What I Shoot &amp; Create</h2>
+          <p class="text-gray-400 mt-3 text-base">
+            Every session is shot on iPhone with Blackmagic Camera for absolute cinematic fidelity, then professionally graded and delivered.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Card 1 -->
+          <div class="bg-brand-card border border-brand-border rounded-3xl p-8 flex flex-col justify-between hover:border-brand-red transition-all group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-red mb-6 text-xl group-hover:bg-brand-red group-hover:text-white transition-colors">
+                <i class="fa-solid fa-camera"></i>
+              </div>
+              <h3 class="display-font text-3xl mb-4 uppercase">Nature Photography</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Evocative portraits and breathtaking natural landscapes captured outdoors in organic natural light. High-resolution edited photos delivered securely in a private online gallery.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-brand-border flex items-center justify-between">
+              <span class="font-mono text-xs text-gray-400">Custom Sessions</span>
+              <a href="#book" class="text-brand-red hover:text-white font-mono text-xs uppercase tracking-wider flex items-center gap-1 font-bold">
+                Inquire <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-brand-card border border-brand-red/60 rounded-3xl p-8 flex flex-col justify-between relative shadow-xl shadow-brand-red/5 group">
+            <div class="absolute -top-3 right-8 bg-brand-red text-white text-[10px] font-mono uppercase px-3 py-1 rounded-full tracking-wider">Most Popular</div>
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-brand-red text-white flex items-center justify-center mb-6 text-xl shadow-lg">
+                <i class="fa-solid fa-video"></i>
+              </div>
+              <h3 class="display-font text-3xl mb-4 uppercase">Cinematic Video</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Short films, social reels, and brand visual clips featuring a distinct cinematic look: shallow depth of field, fluid frame rates, and professional color grade.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-brand-border flex items-center justify-between">
+              <span class="font-mono text-xs text-gray-400">ProRes Log 24fps</span>
+              <a href="#book" class="text-brand-red hover:text-white font-mono text-xs uppercase tracking-wider flex items-center gap-1 font-bold">
+                Inquire <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-brand-card border border-brand-border rounded-3xl p-8 flex flex-col justify-between hover:border-brand-red transition-all group">
+            <div>
+              <div class="w-12 h-12 rounded-2xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-red mb-6 text-xl group-hover:bg-brand-red group-hover:text-white transition-colors">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+              </div>
+              <h3 class="display-font text-3xl mb-4 uppercase">Edit &amp; Color Only</h3>
+              <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                Already have raw footage? Send it over. I will expertly cut, sound-balance, and color grade your clips to give them an unmistakable high-end filmic finish.
+              </p>
+            </div>
+            <div class="pt-6 border-t border-brand-border flex items-center justify-between">
+              <span class="font-mono text-xs text-gray-400">Fast Turnaround</span>
+              <a href="#book" class="text-brand-red hover:text-white font-mono text-xs uppercase tracking-wider flex items-center gap-1 font-bold">
+                Inquire <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-brand-dark">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- Portrait Frame -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border-2 border-brand-border bg-brand-surface group">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" 
+                   alt="DREESHFILMEDIT photographer portrait" 
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                   onerror="this.src='https://placehold.co/800x1000/121212/ff4d4d?text=Portrait'">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent opacity-60"></div>
+              <div class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-brand-dark/80 backdrop-blur-md border border-brand-border">
+                <span class="text-brand-red font-mono text-xs uppercase tracking-widest block">Creator &amp; Director</span>
+                <span class="display-font text-xl text-white">Dreesh (Shelby, NC)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bio Content -->
+          <div class="lg:col-span-7 space-y-6">
+            <span class="text-brand-red font-mono text-xs uppercase tracking-widest block">// BEHIND THE LENS</span>
+            <h2 class="display-font text-4xl sm:text-6xl uppercase tracking-wide">Fresh Perspective. Uncompromising Feel.</h2>
+            
+            <p class="text-gray-300 text-lg font-light leading-relaxed">
+              DREESHFILMEDIT is an independent cinematic studio based right here in Shelby, North Carolina. I approach visual storytelling with a fresh lens, taking deliberate time to capture how a finished piece actually <em>feels</em>.
+            </p>
+
+            <p class="text-gray-400 leading-relaxed">
+              My primary camera is an advanced iPhone paired with the Blackmagic Camera app. This grants absolute control over manual focus, shutter angle, ISO, and ProRes color science—delivering rich, authentic cinema quality without cumbersome lighting rigs or a massive crew getting in your way.
+            </p>
+
+            <div class="flex flex-wrap gap-3 pt-4">
+              <div class="px-4 py-2 rounded-full bg-brand-surface border border-brand-border font-mono text-xs text-gray-300 flex items-center gap-2">
+                <i class="fa-solid fa-location-dot text-brand-red"></i> Shelby, NC
+              </div>
+              <div class="px-4 py-2 rounded-full bg-brand-surface border border-brand-border font-mono text-xs text-gray-300 flex items-center gap-2">
+                <i class="fa-solid fa-mobile-screen text-brand-red"></i> iPhone + Blackmagic Cam
+              </div>
+              <div class="px-4 py-2 rounded-full bg-brand-surface border border-brand-border font-mono text-xs text-gray-300 flex items-center gap-2">
+                <i class="fa-solid fa-bolt text-brand-red"></i> Open For Bookings
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-24 bg-brand-surface border-t border-brand-border">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-brand-red font-mono text-xs uppercase tracking-widest block mb-2">// WORKFLOW</span>
+          <h2 class="display-font text-4xl sm:text-6xl uppercase tracking-wide">How A Session Works</h2>
+          <p class="text-gray-400 mt-3 text-base">Simple, transparent, and collaborative from the first message to final delivery.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Step 1 -->
+          <div class="bg-brand-card border border-brand-border rounded-3xl p-8 relative overflow-hidden group hover:border-brand-red transition-all">
+            <span class="absolute top-4 right-6 display-font text-6xl text-brand-border/40 group-hover:text-brand-red/20 transition-colors">01</span>
+            <div class="w-10 h-10 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-red mb-6 font-mono font-bold">01</div>
+            <h3 class="display-font text-2xl mb-2 uppercase">Say Hello</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Text or email me with your vision, concept, or type of session you need.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-brand-card border border-brand-border rounded-3xl p-8 relative overflow-hidden group hover:border-brand-red transition-all">
+            <span class="absolute top-4 right-6 display-font text-6xl text-brand-border/40 group-hover:text-brand-red/20 transition-colors">02</span>
+            <div class="w-10 h-10 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-red mb-6 font-mono font-bold">02</div>
+            <h3 class="display-font text-2xl mb-2 uppercase">Plan It</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">We pick a stunning outdoor location, schedule timing, and map out the visual look.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-brand-card border border-brand-border rounded-3xl p-8 relative overflow-hidden group hover:border-brand-red transition-all">
+            <span class="absolute top-4 right-6 display-font text-6xl text-brand-border/40 group-hover:text-brand-red/20 transition-colors">03</span>
+            <div class="w-10 h-10 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-red mb-6 font-mono font-bold">03</div>
+            <h3 class="display-font text-2xl mb-2 uppercase">The Shoot</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">A relaxed, comfortable outdoor session capturing authentic moments in prime natural light.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="bg-brand-card border border-brand-border rounded-3xl p-8 relative overflow-hidden group hover:border-brand-red transition-all">
+            <span class="absolute top-4 right-6 display-font text-6xl text-brand-border/40 group-hover:text-brand-red/20 transition-colors">04</span>
+            <div class="w-10 h-10 rounded-xl bg-brand-surface border border-brand-border flex items-center justify-center text-brand-red mb-6 font-mono font-bold">04</div>
+            <h3 class="display-font text-2xl mb-2 uppercase">Grade &amp; Deliver</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">I edit, color grade, and securely deliver your high-res files ready for display or post.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking / Contact Section -->
+    <section id="book" class="py-24 bg-brand-dark border-t border-brand-border relative overflow-hidden">
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-red/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          
+          <!-- Contact Info -->
+          <div class="lg:col-span-5 space-y-8">
+            <div>
+              <span class="text-brand-red font-mono text-xs uppercase tracking-widest block mb-2">// GET IN TOUCH</span>
+              <h2 class="display-font text-4xl sm:text-6xl uppercase tracking-wide">Book A Session</h2>
+              <p class="text-gray-400 mt-3 text-base leading-relaxed">
+                Currently open for sessions in Shelby, NC and surrounding areas. Tell me what you want to create and I’ll reply with rates and availability.
+              </p>
+            </div>
+
+            <div class="space-y-6">
+              <a href="sms:+17044188657" class="flex items-center gap-4 p-5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-red transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center text-brand-red text-xl group-hover:bg-brand-red group-hover:text-white transition-colors">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-mono text-gray-400 block uppercase">Direct SMS / Call</span>
+                  <span class="text-xl font-bold text-white group-hover:text-brand-red transition-colors">704-418-8657</span>
+                </div>
+              </a>
+
+              <a href="mailto:dreciamc@gmail.com" class="flex items-center gap-4 p-5 rounded-2xl bg-brand-surface border border-brand-border hover:border-brand-red transition-all group">
+                <div class="w-12 h-12 rounded-xl bg-brand-card border border-brand-border flex items-center justify-center text-brand-red text-xl group-hover:bg-brand-red group-hover:text-white transition-colors">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div>
+                  <span class="text-xs font-mono text-gray-400 block uppercase">Direct Email</span>
+                  <span class="text-lg font-bold text-white group-hover:text-brand-red transition-colors break-all">dreciamc@gmail.com</span>
+                </div>
+              </a>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-brand-surface border border-brand-border font-mono text-xs text-gray-400 space-y-2">
+              <div class="text-white font-bold uppercase flex items-center gap-2">
+                <i class="fa-solid fa-circle text-brand-red text-[8px] animate-pulse"></i> Shelby, North Carolina
+              </div>
+              <p>Available for local outdoor shoots, nature reserves, brand video projects, and remote editing collaborations.</p>
+            </div>
+          </div>
+
+          <!-- Booking Form -->
+          <div class="lg:col-span-7 bg-brand-surface border border-brand-border rounded-3xl p-8 sm:p-10 shadow-2xl">
+            <form id="booking-form" class="space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label class="block text-xs font-mono uppercase tracking-wider text-gray-300">Your Name *</label>
+                  <input type="text" name="name" required autocomplete="name" placeholder="First &amp; Last Name" 
+                         class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder:text-gray-600 focus:outline-none focus:border-brand-red transition-colors text-sm">
+                </div>
+                <div class="space-y-2">
+                  <label class="block text-xs font-mono uppercase tracking-wider text-gray-300">Service Type</label>
+                  <select name="type" class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-brand-red transition-colors text-sm">
+                    <option>Nature photography</option>
+                    <option>Cinematic video</option>
+                    <option>Edit and color only</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label class="block text-xs font-mono uppercase tracking-wider text-gray-300">Ideal Date or Month</label>
+                <input type="text" name="date" placeholder="e.g. Next weekend or Mid-November" 
+                       class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder:text-gray-600 focus:outline-none focus:border-brand-red transition-colors text-sm">
+              </div>
+
+              <div class="space-y-2">
+                <label class="block text-xs font-mono uppercase tracking-wider text-gray-300">Tell Me More About Your Vision</label>
+                <textarea name="msg" rows="4" placeholder="Location ideas, aesthetic vibe, or what you want to create..." 
+                          class="w-full bg-brand-card border border-brand-border rounded-xl px-4 py-3.5 text-white placeholder:text-gray-600 focus:outline-none focus:border-brand-red transition-colors text-sm resize-y"></textarea>
+              </div>
+
+              <button type="submit" class="w-full bg-brand-red hover:bg-red-600 text-white font-medium py-4 rounded-xl uppercase tracking-wider text-sm transition-all shadow-xl hover:shadow-brand-red/30 flex items-center justify-center gap-2 group cursor-pointer">
+                <span>Send Booking Request via Email</span>
+                <i class="fa-solid fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+              </button>
+
+              <p class="text-center text-xs font-mono text-gray-500">
+                * This will open your email app with your project details pre-filled to dreciamc@gmail.com.
+              </p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-surface border-t border-brand-border py-12 text-sm text-gray-400 font-mono">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-3 h-3 rounded-full bg-brand-red animate-pulse"></div>
+        <span class="display-font text-xl text-white tracking-wider">DREESHFILMEDIT</span>
+        <span class="text-xs text-gray-500">© <span id="current-year">2026</span> Shelby, NC</span>
+      </div>
+      <div class="flex items-center gap-6 text-xs">
+        <a href="#work" class="hover:text-brand-red transition-colors">Portfolio</a>
+        <a href="#services" class="hover:text-brand-red transition-colors">Services</a>
+        <a href="#about" class="hover:text-brand-red transition-colors">About</a>
+        <a href="#book" class="hover:text-brand-red transition-colors">Book</a>
+        <a href="#top" class="hover:text-brand-red transition-colors flex items-center gap-1">Back to Top <i class="fa-solid fa-arrow-up text-[10px]"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 1. Live Timecode Clock simulation (24fps style timecode)
+      const clockEl = document.getElementById('live-time');
+      const startTime = Date.now();
+      const pad = (n) => String(n).padStart(2, '0');
+
+      function updateClock() {
+        if (!clockEl) return;
+        const diff = Date.now() - startTime;
+        const frames = Math.floor((diff / 1000) * 24) % 24;
+        const totalSecs = Math.floor(diff / 1000);
+        const hrs = Math.floor(totalSecs / 3600);
+        const mins = Math.floor((totalSecs % 3600) / 60);
+        const secs = totalSecs % 60;
+        clockEl.textContent = `${pad(hrs)}:${pad(mins)}:${pad(secs)}:${pad(frames)}`;
+      }
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        setInterval(updateClock, 42);
+      }
+
+      // 2. Dynamic Year in Footer
+      const yearEl = document.getElementById('current-year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+
+      // 3. Mobile Navigation Toggle
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+        mobileLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+          });
+        });
+      }
+
+      // 4. Portfolio Filter System
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all
+          filterBtns.forEach(b => {
+            b.classList.remove('bg-brand-red', 'text-white');
+            b.classList.add('bg-brand-surface', 'hover:bg-brand-card', 'text-gray-300', 'border', 'border-brand-border');
+          });
+          // Add active to clicked
+          btn.classList.remove('bg-brand-surface', 'hover:bg-brand-card', 'text-gray-300', 'border', 'border-brand-border');
+          btn.classList.add('bg-brand-red', 'text-white');
+
+          const filterValue = btn.getAttribute('data-filter');
+
+          portfolioItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 5. Booking Form Submission Handling (Mailto + Toast message)
+      const bookingForm = document.getElementById('booking-form');
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+
+      function showToast(msg) {
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = msg;
+        toast.classList.remove('translate-y-32', 'opacity-0');
+        setTimeout(() => {
+          toast.classList.add('translate-y-32', 'opacity-0');
+        }, 4000);
+      }
+
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(bookingForm);
+          const name = formData.get('name');
+          const type = formData.get('type');
+          const date = formData.get('date');
+          const msg = formData.get('msg');
+
+          const emailBody = `Name: ${name}\nService: ${type}\nIdeal Date: ${date}\n\nMessage:\n${msg}`;
+          const mailtoUrl = `mailto:dreciamc@gmail.com?subject=${encodeURIComponent('Session Request: ' + name)}&body=${encodeURIComponent(emailBody)}`;
+          
+          showToast('Opening your email client with session details...');
+          
+          setTimeout(() => {
+            window.location.href = mailtoUrl;
+          }, 800);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
